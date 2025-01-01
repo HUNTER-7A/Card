@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate Data Extractor</title>
+</head>
+<body>
+    <h1>Certificate Data Extractor</h1>
+    <p>Paste the certificate HTML content into the box below:</p>
+    <textarea id="htmlInput" placeholder="Paste the certificate HTML here" rows="10" style="width:100%;"></textarea>
+    <button onclick="parseCertificate()">Extract Data</button>
+    <h2>Extracted Information:</h2>
+    <pre id="output" style="background: #f8f8f8; padding: 10px; border: 1px solid #ddd;"></pre>
+
+    <script>
+        function parseCertificate() {
+            const htmlContent = document.getElementById('htmlInput').value;
+
+            if (!htmlContent) {
+                alert('Please paste the HTML content!');
+                return;
+            }
+
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(htmlContent, 'text/html');
+
+            const registrationNumber = doc.querySelector('.certificate-right .cbox .cbox-right')?.textContent.trim();
+            const name = doc.querySelectorAll('.certificate-right .cbox .cbox-right')[1]?.textContent.trim();
+            const date = doc.querySelectorAll('.certificate-right .cbox .cbox-right')[2]?.textContent.trim();
+            const address = doc.querySelectorAll('.certificate-right .cbox .cbox-right')[3]?.textContent.trim();
+            const occupation = doc.querySelectorAll('.certificate-right .cbox .cbox-right p')?.[0]?.textContent.trim();
+            const activities = doc.querySelectorAll('.certificate-right .cbox .cbox-right p')?.[1]?.textContent.trim();
+            
+
+            const result = `
+Registration Number: ${registrationNumber || "Not available"}
+Name: ${name || "Not available"}
+Date: ${date || "Not available"}
+Address: ${address || "Not available"}
+Occupation: ${occupation || "Not available"}
+Activities: ${activities || "Not available"}
+            `;
+
+            document.getElementById('output').textContent = result;
+        }
+    </script>
+</body>
+</html>
+

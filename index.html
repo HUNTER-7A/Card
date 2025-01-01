@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style2.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card Design</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Ubuntu&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <h1>Certificate Data Extractor</h1>
+    <textarea id="htmlInput" placeholder="Paste the certificate HTML here" rows="10" style="width:100%;"></textarea>
+    <button onclick="parseCertificate()">Extract Data</button>
+    
+
+
+
+    <script>
+        function parseCertificate() {
+            const htmlContent = document.getElementById('htmlInput').value;
+
+            if (!htmlContent) {
+                alert('Please paste the HTML content!');
+                return;
+            }
+
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(htmlContent, 'text/html');
+            const registrationNumber = doc.querySelector('.certificate-right .cbox .cbox-right')?.textContent.trim();
+            const name = doc.querySelectorAll('.certificate-right .cbox .cbox-right')[1]?.textContent.trim();
+            const date = doc.querySelectorAll('.certificate-right .cbox .cbox-right')[2]?.textContent.trim();
+            const address = doc.querySelectorAll('.certificate-right .cbox .cbox-right')[3]?.textContent.trim();
+            const occupation = doc.querySelectorAll('.certificate-right .cbox .cbox-right p')?.[0]?.textContent.trim();
+            const activities = doc.querySelectorAll('.certificate-right .cbox .cbox-right p')?.[1]?.textContent.trim();
+            const imageUrl = doc.querySelector('#wrapper > div.certificate > div.certificate-thumb > img')?.src;
+            document.getElementById('registrationNumber').textContent = `${registrationNumber || "Not available"}`;
+            document.getElementById('name').textContent = `${name || "Not available"}`;
+            document.getElementById('date').textContent = `${date || "Not available"}`;
+            document.getElementById('address').textContent = `${address || "Not available"}`;
+            document.getElementById('occupation').textContent = `${occupation || "Not available"}`;
+            document.getElementById('activities').textContent = `${activities || "Not available"}`;
+            const imageElement = document.getElementById('certificateImage');
+            if (imageUrl) {
+                imageElement.src = imageUrl;
+                imageElement.style.display = 'block';
+            } else {
+                imageElement.style.display = 'none';
+            }
+        }
+    </script>
+    <button id="selectImageBtn">Select QR From Files</button>
+    <input type="file" id="fileInput" style="display: none;">
+    <button id="pasteImageBtn">Paste QR</button>
+    <div class="no-print">
+        <h1>Card</h1>
+        <p>Click the button below to print the card design.</p>
+        <button onclick="window.print()">Print Card</button>
+    </div>
+    <div class="card-container">
+        <div class="card front">
+            <div class="front-content">
+                <div style="width: 30%;">
+                    <img id="certificateImage" src="" alt="Certificate Image"
+                        style="max-width: 300px; display: none;" />
+                </div>
+                <div class="jem" style="width: 70%;">
+                    <!-- <table
+                        <tr>
+                            <td>Name</td>
+                            <td> <p id="name"></p><br></td>
+                        </tr>
+                        <tr>
+                            <td>Date of registration</td>
+                            <td><p id="date"></p></td>
+                        </tr>
+                        <tr>
+                            <td>Occupation:</td>
+                            <td><p id="occupation"></p></td>
+                        </tr>
+                        <tr>
+                            <td>Typr of activities <br>engaged in</td>
+                            <td><p id="activities"></p></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p id="registrationNumber"></p>
+
+                            </td>
+                        </tr>
+                    </table> -->
+                    <p><strong>Name:</strong> <span id="name">N/A</span></p>
+                    <p><strong>Date:</strong> <span id="date">N/A</span></p>
+                    <p><strong>Occupation:</strong> <span id="occupation">N/A</span></p>
+                    <p><strong>Type of Activities: </strong><span id="activities">N/A</span><br><strong>engaged
+                            in</strong></p>
+                    <div>
+                        <p><strong>Registration Number</strong><br><span id="registrationNumber">N/A</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card back">
+            <div class="back-content">
+                <div class="adds" style="width: 65%;">
+                    <p><strong>Address:</strong><br> <span id="address">N/A</span></p>
+                </div>
+                <div class="qrc" style="width: 35%;">
+                    <img id="imageDisplay" src="" alt="Selected Image">
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+    <script>
+        document.getElementById('selectImageBtn').addEventListener('click', function () {
+            document.getElementById('fileInput').click();
+        });
+
+        document.getElementById('fileInput').addEventListener('change', function (event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    document.getElementById('imageDisplay').src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        document.getElementById('pasteImageBtn').addEventListener('click', function () {
+            navigator.clipboard.read().then(function (items) {
+                for (let i = 0; i < items.length; i++) {
+                    const item = items[i];
+                    if (item.type.startsWith('image/')) {
+                        const blob = item.getAsFile();
+                        const reader = new FileReader();
+                        reader.onload = function (e) {
+                            document.getElementById('imageDisplay').src = e.target.result;
+                        };
+                        reader.readAsDataURL(blob);
+                    }
+                }
+            }).catch(function (error) {
+                console.error('Failed to read clipboard contents: ', error);
+            });
+        });
+
+        document.addEventListener('paste', function (e) {
+            if (e.clipboardData && e.clipboardData.items) {
+                const items = e.clipboardData.items;
+                for (let i = 0; i < items.length; i++) {
+                    if (items[i].type.indexOf("image") === 0) {
+                        const blob = items[i].getAsFile();
+                        const reader = new FileReader();
+                        reader.onload = function (event) {
+                            document.getElementById('imageDisplay').src = event.target.result;
+                        };
+                        reader.readAsDataURL(blob);
+                        return;
+                    }
+                }
+            }
+        });
+
+
+    </script>
+</body>
+
+</html>

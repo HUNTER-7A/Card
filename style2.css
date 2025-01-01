@@ -1,0 +1,259 @@
+.body{
+    font-family: roboto;
+}
+
+body {
+    font-family: Roboto, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+button{
+    border: 2px solid black;
+}
+
+.card-container {
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-between; */
+    padding: 20px;
+}
+
+
+.card {
+    width: 85.60mm;
+    /* Debit card width */
+    height: 53.98mm;
+    /* Debit card height */
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('/front.png');
+    background-size: cover;
+    /* Ensure the image covers the card */
+    background-position: center;
+    /* Center the image */
+    background-repeat: no-repeat;
+    /* Prevent tiling */
+}
+
+.front,
+.back {
+    /* width: 100%; */
+    /* height: 100%; */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.back {
+    background-color: #e0e0e0;
+}
+
+/* Print Styles */
+@media print {
+    body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+    }
+
+    .card-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        page-break-before: always;
+        margin: 0;
+        padding: 0;
+    }
+
+    .card {
+        width: 85.60mm;
+        /* Match debit card size */
+        height: 53.98mm;
+        /* Match debit card size */
+        margin: 0 10mm;
+
+
+    }
+
+    .card {
+        image-rendering: high-quality;
+        /* Modern browsers */
+        image-rendering: optimizeQuality;
+        /* Fallback */
+        -webkit-print-color-adjust: exact;
+        /* Force accurate color in print */
+    }
+
+    /* Hide everything that isn't necessary for the print */
+    .no-print {
+        display: none;
+    }
+
+    .card-container {
+        page-break-inside: avoid;
+    }
+
+    /* A4 size setup */
+    @page {
+        size: A4;
+        margin: 0;
+    }
+}
+.certificate-right {
+        flex: 0 0 75%;
+        padding-left: 30px;
+    }
+
+    .cbox {
+        display: flex;
+        align-items: baseline;
+        margin-bottom: 30px;
+    }
+
+    .cbox-left {
+        font-size: 20px;
+        padding-right: 30px;
+        font-weight: 700;
+        font-family: Roboto, sans-serif;
+    }
+
+    .cbox {
+        display: flex;
+        align-items: baseline;
+        margin-bottom: 30px;
+    }
+
+    #certificateImage {
+        height: 100px;
+        transform: translate3d(0px, 5px, 0px)
+    }
+
+    .front-content {
+        display: flex;
+        line-height: 10px;
+        align-items: center;
+        font-size: 10px;
+        font-weight: 400;
+        width: 100%;
+    }
+
+    table{
+        font-size: 9px;
+        row-gap: 0px;
+        column-gap: 0px;
+        border-spacing: -2px;
+    }
+    table tr, td{
+        height: 9px;
+    }
+
+    .jem p{
+        margin: 1px;
+        margin-top: 5px;
+        margin-left: 5px;
+    }
+    .jem div{
+        transform: translate3d(40px, 0px, 0px);
+        font-size: 13px;
+        line-height: 13px;
+        
+    }
+    #registrationNumber{
+        margin-left: 7px;
+
+    }
+
+    .back-content {
+        display: flex;
+        line-height: 13px;
+        /* align-items: center; */
+        font-size: 9px;
+        font-weight: 400;
+        width: 100%;
+    }
+    .adds{
+        width: 65%;
+
+    }
+    #address{
+        font-size: 11px;
+    }
+    .qrc{
+        width: 35%;
+        margin-right: 10px;
+        
+    }
+    .qrc img{
+        height: 90px;
+        width: 90px;
+        border:1px solid black;
+    }
+
+
+    .back{
+        background-image: url('/back.png');
+        background-size: cover; /* Ensure the image covers the card */
+        background-position: center; /* Center the image */
+        background-repeat: no-repeat; /* Prevent tiling */
+    }
+    .front{
+        background-image: url('/front.png');
+        background-size: cover; /* Ensure the image covers the card */
+        background-position: center; /* Center the image */
+        background-repeat: no-repeat; /* Prevent tiling */
+    }
+
+
+
+
+
+
+
+   /* From Uiverse.io by e-coders */ 
+button {
+    appearance: none;
+    background-color: transparent;
+    border: 0.125em solid #1A1A1A;
+    border-radius: 0.9375em;
+    box-sizing: border-box;
+    color: #3B3B3B;
+    cursor: pointer;
+    display: inline-block;
+    font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-size: 16px;
+    font-weight: 600;
+    line-height: normal;
+    margin: 0;
+    min-height: 3.75em;
+    min-width: 0;
+    outline: none;
+    padding: 1em 2.3em;
+    text-align: center;
+    text-decoration: none;
+    transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    will-change: transform;
+   }
+   
+   button:disabled {
+    pointer-events: none;
+   }
+   
+   button:hover {
+    color: #fff;
+    background-color: #1A1A1A;
+    box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+    transform: translateY(-2px);
+   }
+   
+   button:active {
+    box-shadow: none;
+    transform: translateY(0);
+   }
