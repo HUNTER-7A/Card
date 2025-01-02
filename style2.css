@@ -197,8 +197,7 @@ button{
 
     .back{
         /* background-image: url('./back.png');*/
-        background-image: url('
-        https://github.com/HUNTER-7A/Card/blob/40a85f357e0ab109746b1bd96dd45c6f3dabf0d9/back.png');
+        background-image: url('https://github.com/HUNTER-7A/Card/blob/40a85f357e0ab109746b1bd96dd45c6f3dabf0d9/back.png');
         background-size: cover; /* Ensure the image covers the card */
         background-position: center; /* Center the image */
         background-repeat: no-repeat; /* Prevent tiling */
