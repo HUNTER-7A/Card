@@ -196,13 +196,13 @@ button{
 
 
     .back{
-        background-image: url('/back.png');
+        background-image: url('./back.png');
         background-size: cover; /* Ensure the image covers the card */
         background-position: center; /* Center the image */
         background-repeat: no-repeat; /* Prevent tiling */
     }
     .front{
-        background-image: url('/front.png');
+        background-image: url('./front.png');
         background-size: cover; /* Ensure the image covers the card */
         background-position: center; /* Center the image */
         background-repeat: no-repeat; /* Prevent tiling */
